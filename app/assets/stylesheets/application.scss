@@ -30,9 +30,24 @@
 }
 
 .sidebar{
-  background-color: orange;
   width: 200px;
   height: 100%;
   left: -180px;
   top: 0;
+  color: white;
+  background-color: rgb(249, 146, 69);
+  opacity: 1;
+  z-index: 1;
+  .nav-list{
+    list-style-type: none;
+    .nav-list-item{
+      padding: 10px 0;
+    }
+  }
+}
+
+.error-explanation{
+  .error-list{
+    list-style-type: none;
+  }
 }

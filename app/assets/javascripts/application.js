@@ -20,14 +20,18 @@
 $(document).on("turbolinks:load", function(){
   $(".sidebar").on(
     {"mouseover": function(){
+    $(".main-content").stop().animate({
+      "opacity": 0.3
+    }, 500)
     $(this).stop().animate({
       "left": 0,
-      "background-color": "yellow",
     }, 500)},
     "mouseout": function(){
+      $(".main-content").stop().animate({
+        "opacity": 1
+      }, 500)
       $(this).stop().animate({
         "left": "-180px",
-        "background-color": "orange"
       }, 500)
     }
   })
