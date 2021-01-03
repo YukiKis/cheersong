@@ -19,5 +19,12 @@ RSpec.describe 'Sidebar', type: :system do
     end
   end
   context 'when logged in as user' do
+    let(:user1){ create(:user1) }
+    before do
+      login_user(user1)
+    end
+    it "has link to logout" do
+      expect(page).to have_link "LOGOUT", destroy_user_session_path
+    end
   end
 end
