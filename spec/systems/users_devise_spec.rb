@@ -15,7 +15,7 @@ RSpec.describe "User-devise page", type: :system do
       expect(page).to have_field "user[password]"
     end
     it "has form for password_confirmation" do
-      expect(page).to have_field "user[password_confirmation"
+      expect(page).to have_field "user[password_confirmation]"
     end
     it "has button to submit" do
       expect(page).to have_button "登録"
@@ -30,6 +30,31 @@ RSpec.describe "User-devise page", type: :system do
     end
     it "fails to register" do
       click_button "登録"
+      expect(page).to have_content "エラー"
+    end
+  end
+  context "on new-session" do
+    let(:user1){ create(:user1) }
+    before do
+      visit new_user_session_path
+    end
+    it "has form for name" do
+      expect(page).to have_field "user[name]"
+    end
+    it "has form for password" do
+      expect(page).to have_field "user[password]"
+    end
+    it "has button to submit" do
+      expect(page).to have_button "ログイン"
+    end
+    it "succeeds to login" do
+      fill_in "user[name]", with: user1.name
+      fill_in "user[password]", with: user1.password
+      click_button "ログイン"
+      expect(page).to have_content "successfully"
+    end
+    it "fails to login" do
+      click_button "ログイン"
       expect(page).to have_content "エラー"
     end
   end
