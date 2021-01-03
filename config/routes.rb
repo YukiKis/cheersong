@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
   devise_for :users, controllers: {
       sessions: "public/users/sessions",
-      registrations: "users/registrations"
+      registrations: "public/users/registrations"
     }
   root "home#home"
   get '/about', to: "home#about"

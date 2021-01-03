@@ -22,9 +22,17 @@
   box-sizing: border-box;
 }
 
-.relaive{
-  display: relative;
+.relative{
+  position: relative;
   .absolute{
-    display: absolute;
+    position: absolute;
   }
+}
+
+.sidebar{
+  background-color: orange;
+  width: 200px;
+  height: 100%;
+  left: -180px;
+  top: 0;
 }

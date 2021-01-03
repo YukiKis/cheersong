@@ -16,3 +16,19 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).on("turbolinks:load", function(){
+  $(".sidebar").on(
+    {"mouseover": function(){
+    $(this).stop().animate({
+      "left": 0,
+      "background-color": "yellow",
+    }, 500)},
+    "mouseout": function(){
+      $(this).stop().animate({
+        "left": "-180px",
+        "background-color": "orange"
+      }, 500)
+    }
+  })
+})
