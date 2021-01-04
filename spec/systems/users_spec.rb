@@ -57,6 +57,8 @@ RSpec.describe "User-page", type: :system do
     # end
     # it "has list for songs" do
     # end
+#    it "has songs list" do
+#    end
   end
   context "on edit" do
   end
