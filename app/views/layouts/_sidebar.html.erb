@@ -1,7 +1,18 @@
 <nav class="absolute sidebar text-center">
   <h2>MENU</h2>
+  <% if user_signed_in? && %>
+    <div class="own-info text-center" style="background-color: rgba(15, 195, 250, 0.4)">
+      <span>IMGIMG</span>
+       <ul class="own-info-list">
+         <li class="own-info-list-item"><%= current_user.name %></li>
+         <li class="own-info-list-item"><%= link_to "MY PAGE", user_path(current_user) %></li>
+         <li class-"own-info-list-item"><%= link_to "EDIT", edit_user_path(current_user) %></li>
+       </ul>
+    </div>
+  <% end %>
   <ul class="nav-list">
     <% if user_signed_in? %>
+      <li class="nav-list-item"><%= link_to "USERS", users_path %></li>
       <li class="nav-list-item"><%= link_to "LOGOUT", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" } %></li>
     <% else %>
       <li class="nav-list-item"><%= link_to "HOME", root_path %></li>

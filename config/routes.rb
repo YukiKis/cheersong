@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope module: :public do
-
+    resources :users
   end
   devise_for :users, controllers: {
       sessions: "public/users/sessions",
