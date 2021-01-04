@@ -1,2 +1,26 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div class="col-sm-12 relative">
+  <%= render "layouts/sidebar" %>
+  <div class="main-content">
+    <%= render "layouts/jumbotron" %>
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1">
+        <h2>ユーザー情報</h2>
+        <span>IMGIMG</span>
+        <table class="table">
+          <tr><th>Follower</th><td></td></tr>
+          <tr><th>Followings</th><td></td></tr>
+          <% if @user != current_user %>
+            <%# if current_user.following?(@user) %>
+              <%#= link_to "Follow!", follow_users_path(@user) %>
+            <%# else %>
+              <%#= link_to "Unfollow", unfollow_users_path(@user) %>
+            <%# end %>
+          <% end %>
+        </table>
+      </div>
+      <div class="col-sm-6">
+        <h3>Songs</h3>
+      </div>
+    </div>
+  </div>
+</div>

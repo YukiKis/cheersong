@@ -31,6 +31,32 @@ RSpec.describe "User-page", type: :system do
       
   end
   context "on show" do
+    before do 
+      visit user_path(user1)
+    end
+    it "has own info on sidebar" do
+      expect(page).to have_css ".my-img"
+      expect(page).to have_content user1.name
+      expect(page).to have_content user1.introduction
+      expect(page).to have_link "EDIT", href: edit_user_path(user1)
+    end
+    it "has user name" do
+      expect(page).to have_content user1.name
+    end
+    it "has user introduction" do
+      expect(page).to have_content user1.introduction
+    end
+    # it "has followers list" do
+    #   expect(page).to have_content user1.followings.count
+    #   expect(page).to have_link "follower".pluralize(user1.followers.count), href: followers_users_path(usre1)
+    #   expect(page).to have_content user1.followers.count
+    #   expect(page).to have_link "following".pluralie(user1.followings.count), href: followings_users_path(usre1)
+    # end
+    # it "has link to check chats" do
+    #   expect(page).to have_link "Check Chats", href: chats_users_path(user1)
+    # end
+    # it "has list for songs" do
+    # end
   end
   context "on edit" do
   end
