@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   scope module: :public do
-    resources :users
+    resources :users do
+      member do
+        post "/follow", to: "users#follow", as: :follow
+        delete "/unfollow", to: "users#unfollow", as: :unfollow
+      end
+    end
   end
   devise_for :users, controllers: {
       sessions: "public/users/sessions",

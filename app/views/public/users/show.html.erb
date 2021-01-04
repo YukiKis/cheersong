@@ -10,11 +10,11 @@
           <tr><th>Follower</th><td></td></tr>
           <tr><th>Followings</th><td></td></tr>
           <% if @user != current_user %>
-            <%# if current_user.following?(@user) %>
-              <%#= link_to "Follow!", follow_users_path(@user) %>
-            <%# else %>
-              <%#= link_to "Unfollow", unfollow_users_path(@user) %>
-            <%# end %>
+            <% if current_user.following?(@user) %>
+              <%= link_to "Unfollow", unfollow_user_path(@user), method: :delete, data: { confirm: "Are you sure?" } %>
+            <% else %>
+              <%= link_to "Follow!", follow_user_path(@user), method: :post %>
+            <% end %>
           <% end %>
         </table>
       </div>
