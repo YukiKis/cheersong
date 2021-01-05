@@ -46,12 +46,12 @@ RSpec.describe "User-page", type: :system do
     it "has user introduction" do
       expect(page).to have_content user1.introduction
     end
-    # it "has followers list" do
-    #   expect(page).to have_content user1.followings.count
-    #   expect(page).to have_link "follower".pluralize(user1.followers.count), href: followers_users_path(usre1)
-    #   expect(page).to have_content user1.followers.count
-    #   expect(page).to have_link "following".pluralie(user1.followings.count), href: followings_users_path(usre1)
-    # end
+    it "has followers list" do
+      expect(page).to have_content user1.followings.count
+      expect(page).to have_link "", href: followers_users_path(usre1)
+      expect(page).to have_content user1.followers.count
+      expect(page).to have_link "", href: followings_users_path(usre1)
+    end
     # it "has link to check chats" do
     #   expect(page).to have_link "Check Chats", href: chats_users_path(user1)
     # end

@@ -7,15 +7,25 @@
         <h2>ユーザー情報</h2>
         <span>IMGIMG</span>
         <table class="table">
-          <tr><th>Follower</th><td></td></tr>
-          <tr><th>Followings</th><td></td></tr>
-          <% if @user != current_user %>
-            <% if current_user.following?(@user) %>
-              <%= link_to "Unfollow", unfollow_user_path(@user), method: :delete, data: { confirm: "Are you sure?" } %>
-            <% else %>
-              <%= link_to "Follow!", follow_user_path(@user), method: :post %>
+          <tr><th>
+            <%= link_to followers_user_path do %>
+              <%= counter("follower", @user.followers.count) %>
             <% end %>
-          <% end %>
+          </th></tr>
+          <tr><th>
+            <%= link_to followings_user_path do %>
+              <%= counter("following", @user.followings.count) %>
+            <% end %>
+          </th></tr>
+          <tr>
+            <% if @user != current_user %>
+              <% if current_user.following?(@user) %>
+                <th><%= link_to "Unfollow", unfollow_user_path(@user), method: :delete, data: { confirm: "Are you sure?" } %></th>
+              <% else %>
+                <th><%= link_to "Follow", follow_user_path(@user), method: :post %></th>
+              <% end %>
+            <% end %>
+          </tr>
         </table>
       </div>
       <div class="col-sm-6">

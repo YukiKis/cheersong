@@ -4,6 +4,12 @@ RSpec.describe User, type: :mdoel do
   let(:user1){ create(:user1) }
   let(:user2){ create(:user2) }
   context "on validation" do
+    it "has many messages" do
+      expect(User.reflect_on_association(:messages).macro).to eq :has_many
+    end
+    it "has many rooms through messages" do
+      expect(User.reflect_on_association(:room).macro).to eq :has_many
+    end
     it "has many passive_relationships" do
       expect(User.reflect_on_association(:passive_relationships).macro).to eq :has_many
     end

@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :active_relationships, foreign_key: :following_id, class_name: :Relationship
   has_many :followers, through: :passive_relationships, source: :following
   has_many :followings, through: :active_relationships, source: :followed
+  has_many :messages, dependent: :destroy
+  has_many :rooms, through: :messages
   
   def follow(user)
     self.active_relationships.create(followed: user)
@@ -22,5 +24,9 @@ class User < ApplicationRecord
   
   def following?(user)
     self.active_relationships.find_by(followed: user)
+  end
+  
+  def has_messages?(user)
+    self.rooms.find_by(user: user)
   end
 end
