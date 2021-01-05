@@ -18,15 +18,14 @@
                 <td><%= user.name %></td>
                 <td><%#= counter("song", user.songs.count) %></td>
                 <% if current_user.following?(user) %>
-                  <td><%= link_to "Unfollow", unfollow_user_path(user), method: :delete %></td>
+                  <td><%= link_to "Unfollow", user_unfollow_path(user), method: :delete %></td>
                 <% else %>
-                  <td><%= link_to "Follow", follow_user_path(user), method: :post %></td>
+                  <td><%= link_to "Follow", user_follow_path(user), method: :post %></td>
                 <% end %>
-                <% if current_user.has_messages?(user) %>
-                  <% room = current_user.rooms.find_by(user: user) %>
+                <% if room = current_user.has_room?(user) %>
                   <td><%= link_to "Chat", room_messages_path(user, room), class: "btn btn-primary" %></td>
                 <% else %>
-                  <td><%= link_to "Chat", rooms_path(user), method: :post, class: "btn btn-primaey" %>%></td>
+                  <td><%= link_to "Chat", user_rooms_path(user), method: :post, class: "btn btn-primaey" %>%></td>
                 <% end %>
               </tr>
             <% end %>

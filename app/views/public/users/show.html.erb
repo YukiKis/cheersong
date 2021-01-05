@@ -6,23 +6,25 @@
       <div class="col-sm-4 col-sm-offset-1">
         <h2>ユーザー情報</h2>
         <span>IMGIMG</span>
+        
         <table class="table">
+          <tr><th><%= @user.name %></th></tr>
           <tr><th>
-            <%= link_to followers_user_path do %>
+            <%= link_to user_followers_path(@user) do %>
               <%= counter("follower", @user.followers.count) %>
             <% end %>
           </th></tr>
           <tr><th>
-            <%= link_to followings_user_path do %>
+            <%= link_to user_followings_path(@user) do %>
               <%= counter("following", @user.followings.count) %>
             <% end %>
           </th></tr>
           <tr>
             <% if @user != current_user %>
               <% if current_user.following?(@user) %>
-                <th><%= link_to "Unfollow", unfollow_user_path(@user), method: :delete, data: { confirm: "Are you sure?" } %></th>
+                <th><%= link_to "Unfollow", user_unfollow_path(@user), method: :delete, data: { confirm: "Are you sure?" } %></th>
               <% else %>
-                <th><%= link_to "Follow", follow_user_path(@user), method: :post %></th>
+                <th><%= link_to "Follow", user_follow_path(@user), method: :post %></th>
               <% end %>
             <% end %>
           </tr>

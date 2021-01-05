@@ -11,7 +11,8 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :following
   has_many :followings, through: :active_relationships, source: :followed
   has_many :messages, dependent: :destroy
-  has_many :rooms, through: :messages
+  has_many :keys, dependent: :destroy
+  has_many :rooms, through: :keys
   
   def follow(user)
     self.active_relationships.create(followed: user)
@@ -26,7 +27,12 @@ class User < ApplicationRecord
     self.active_relationships.find_by(followed: user)
   end
   
-  def has_messages?(user)
-    self.rooms.find_by(user: user)
+  def has_room?(user)
+    self.rooms.each do |room|
+      if room.users == [self, user]
+        return room
+      end
+    end
+    false
   end
 end

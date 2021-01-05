@@ -11,19 +11,19 @@ class Public::UsersController < ApplicationController
   end
   
   def follow
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     current_user.follow(@user)
     redirect_to @user
   end
   
   def unfollow
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     current_user.unfollow(@user)
     redirect_to @user
   end
   
   def followers
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     count = @user.followers.count
     @title = "#{ count } #{ "follower".pluralize(count) }"
     @users = @user.followers
@@ -31,7 +31,7 @@ class Public::UsersController < ApplicationController
   end
   
   def followings
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     count = @user.followings.count
     @title = "#{ count } #{ "following".pluralize(count) }"
     @users = @user.followings
