@@ -28,6 +28,17 @@
               <% end %>
             <% end %>
           </tr>
+          <tr>
+            <th>
+              <% if @user != current_user %>
+                <% if @room %>
+                  <%= link_to "Chats", user_room_path(@user, @room), class: "btn btn-primary btn-block" %>
+                <% else %>
+                  <%= link_to "Chats", user_rooms_path(@user), method: :post, class: "btn btn-success btn-block" %>
+                <% end %>
+              <% end %>
+            </th>
+          </tr>
         </table>
       </div>
       <div class="col-sm-6">

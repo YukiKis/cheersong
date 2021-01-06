@@ -28,8 +28,43 @@ RSpec.describe "User-page", type: :system do
         expect(page).to have_link "SEE MORE", href: user_path(user)
       end
     end
-      
   end
+  
+  context "on follow" do
+    before do 
+      user1.follow(user2)
+      visit user_followings_path(user1)
+    end
+    it "has followings_list" do
+      #actual check
+      expect(page).to have_content user2.name
+      expect(page).to have_link "Unfollow", href: user_unfollow_path(user2)
+      #check with each
+      user1.followings.each do |following|
+        expect(page).to have_content following.name
+        expect(page).to have_link "Unfollow", href: user_unfollow_path(following)
+      end
+    end
+  end
+  
+  context "on followres" do
+    before do
+      user2.follow(user1)
+      visit user_followers_path(user1)
+    end
+    it "has followres_list" do
+      expect(page).to have_content user2.name
+    end
+    it "has link to follow if not follow yet" do
+      expect(page).to have_link "Follow", href: user_follow_path(user2)
+    end
+    it "hsa link to unfollow if already follow" do
+      user1.follow(user2)
+      visit current_path
+      expect(page).to have_link "Unfollow", href: user_unfollow_path(user2)
+    end
+  end
+  
   context "on show" do
     before do 
       visit user_path(user1)
@@ -52,11 +87,21 @@ RSpec.describe "User-page", type: :system do
       expect(page).to have_content user1.followers.count
       expect(page).to have_link "", href: followings_users_path(usre1)
     end
-    # it "has link to check chats" do
-    #   expect(page).to have_link "Check Chats", href: chats_users_path(user1)
-    # end
-    # it "has list for songs" do
-    # end
+    it "has no link for chats if it is own" do
+      expect(page).to have_no_selector "a", "Chats"
+    end
+    it "has link for chats" do
+       visit user_path(user2)
+       room = user1.make_room(user2)
+       user1.has_room?(user2)
+       expect(page).to have_link "Chats", href: user_room_path(user2, room)
+    end
+    it "has link for beginning chats" do
+      visit user_path(user2)
+      expect(page).to have_link "Chats", href: user_rooms_path(user2)
+    end
+    #it "has list for songs" do
+    #end
 #    it "has songs list" do
 #    end
   end

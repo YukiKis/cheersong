@@ -45,5 +45,22 @@ RSpec.describe User, type: :mdoel do
       user1.follow(user2)
       expect{ user1.unfollow(user2) }.to change{ user1.active_relationships.count }.by(-1)
     end
+    it "checks whether user follow somebody or not" do
+      user1.follow(user2)
+      expect(user1.following?(user2)).to be_truthy
+      user1.unfollow(user2)
+      expect(user1.following?(user2)).to be_falthy
+    end
+    it "check whether user has room with somebody or not" do
+      room = Room.create
+      room.users << [user1, user2]
+      expect(user1.has_room?(user2)).to be_truthy
+      expect(user1.has_room?(user3)).to be_falthy
+    end
+    # it "makes room with somebody" do
+    #   expect{ user1.make_room(user2) }.to change{ Room.all.count }.by(1)
+    #   user1.make_room(user3)
+    #   expect(user1.has_room?(user3)).to be_truthy
+    # end    
   end
 end
