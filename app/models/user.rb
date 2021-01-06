@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :keys, dependent: :destroy
   has_many :rooms, through: :keys
+  has_many :songs, dependent: :destroy
   
   def follow(user)
     self.active_relationships.create(followed: user)
@@ -29,7 +30,7 @@ class User < ApplicationRecord
   
   def has_room?(user)
     self.rooms.each do |room|
-      if room.users == [self, user]
+      if room.users == [self, user] || [user, self]
         return room
       end
     end
