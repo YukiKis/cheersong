@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
   def index
     @users = User.all
+    @rooms = current_user.rooms.all
   end
 
   def show

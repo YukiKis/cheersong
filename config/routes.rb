@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       delete "/unfollow", to: "users#unfollow", as: :unfollow
       get "/followers", to: "users#followers", as: :followers
       get "/followings", to: "users#followings", as: :followings
-      resources :rooms, only: [:create, :show] do
+      resources :rooms, only: [:create, :show, :index] do
         resources :messages, only: [:create]
       end
     end

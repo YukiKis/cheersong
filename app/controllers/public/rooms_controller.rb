@@ -4,7 +4,9 @@ class Public::RoomsController < ApplicationController
   end
 
   def show
-    @room = current_user.has_room?(@user)
+    @room = Room.includes(:messages).find(params[:id])
+    @user = @room.users.find(params[:user_id])
+    @message = Message.new
   end
   
   def create
