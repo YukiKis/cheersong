@@ -8,7 +8,13 @@ RSpec.describe "room-page", type: :system do
   end
   context "on index" do
     before do
-      visit user_rooms_path
+      visit user_rooms_path(user1)
+    end
+    it "has users list with room" do
+      user1.rooms.each do |room|
+        
+        expect(page).to have_link "Enter Room", href: user_room_path()
+      end
     end
   end
   

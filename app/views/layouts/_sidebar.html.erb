@@ -6,7 +6,8 @@
        <ul class="own-info-list">
          <li class="own-info-list-item"><%= current_user.name %></li>
          <li class="own-info-list-item"><%= link_to "MY PAGE", user_path(current_user) %></li>
-         <li class-"own-info-list-item"><%= link_to "EDIT", edit_user_path(current_user) %></li>
+         <li class="own-info-list-item"><%= link_to "EDIT", edit_user_path(current_user) %></li>
+         <li class="own-info-list-item"><%= link_to "Chats", user_rooms_path(current_user) %></li>
        </ul>
     </div>
   <% end %>

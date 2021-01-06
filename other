@@ -1,0 +1,15 @@
+
+[1mFrom:[0m /home/ec2-user/environment/cheersong/app/views/public/rooms/index.html.erb:17 ActionView::CompiledTemplates#_app_views_public_rooms_index_html_erb__1619903456774819108_29652140:
+
+    [1;34m12[0m:         </thead>
+    [1;34m13[0m:         <tbody>
+    [1;34m14[0m:           <% @rooms.each do |room| %>
+    [1;34m15[0m:             <% 
+    [1;34m16[0m:               other = room.users.each { |user| user if current_user != user }
+ => [1;34m17[0m:               binding.pry
+    [1;34m18[0m:             %>
+    [1;34m19[0m:             <tr>
+    [1;34m20[0m:               <td><%= other.name %></td>
+    [1;34m21[0m:               <td><%= room.messages.last.content %> <%= room.messages.last.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+    [1;34m22[0m:               <td><%= link_to "Enter Room", user_room_path(other, room) %></td>
+
