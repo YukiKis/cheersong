@@ -4,6 +4,9 @@ RSpec.describe User, type: :mdoel do
   let(:user1){ create(:user1) }
   let(:user2){ create(:user2) }
   context "on validation" do
+    it "has many favorites" do
+      expect(User.reflect_on_association(:favorites).macro).to eq :has_many
+    end
     it "has many songs" do
       expect(User.reflect_on_association(:songs).macro).to eq :has_many
     end

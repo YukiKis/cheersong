@@ -23,6 +23,12 @@ RSpec.describe 'Sidebar', type: :system do
     before do
       login_user(user1)
     end
+    it "has link to users" do
+      expect(page).to have_link "USERS", href: users_path
+    end
+    it "has link to songs" do
+      expect(page).to have_link "SONGS", href: songs_path
+    end
     it "has link to logout" do
       expect(page).to have_link "LOGOUT", href; destroy_user_session_path
     end

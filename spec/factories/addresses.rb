@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :address do
-    song { nil }
-    url { "MyText" }
+    url { "https://www.com" }
   end
 end
