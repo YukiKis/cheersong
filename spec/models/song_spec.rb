@@ -25,4 +25,10 @@ RSpec.describe Song, type: :model do
       expect(song).to be_invalid
     end
   end
+  context "on method" do
+    it "checks whether it has favorite of current_user" do
+      song.favorites.create(user_id: user1.id)
+      expect(song.favorited_by?(user1)).to be_truthy
+    end
+  end
 end

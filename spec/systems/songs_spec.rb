@@ -35,7 +35,13 @@ RSpec.describe "songs-page", type: :system do
       end
     end
     it "has song favorite_link" do
-      expect(page).to have_content "★", href:  song_favorite_path(song)
+      expect(page).to have_link "★", href: song_favorite_path(song)
+    end
+    it "hsa delete-song-favorite link" do
+      song.favorites.create(user: user1)
+      visit song_path(song)
+      expect(page).to have_link "★", href: song_favorite_path(song)
+      expect{ click_on "★" }.to change{ song.favorites.count }.by(-1)
     end
   end
   

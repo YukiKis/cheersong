@@ -5,4 +5,8 @@ class Song < ApplicationRecord
   
   validates :name, presence: true
   validates :description, length: { maximum: 500 }
+  
+  def favorited_by?(user)
+    self.favorites.find_by(user_id: user.id)
+  end
 end

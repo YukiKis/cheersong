@@ -11,16 +11,25 @@
       <div class="col-sm-6">
         <div class="song-info">
           <table>
-            <th>NAME</th>
-            <td><%= @song.name %> <%= link_to "★",  song_favorite_path(song) , method: :post>
-            <th>DESCRIPTION</th>
-            <td><%= song.description %></td>
-            <th>URL</th>
+            <tr><th>NAME</th>
             <td>
-              <% @song.addresses.each do |address| %>
-                <%= address.name %>&emsp;<%= address.url %>
+              <%= @song.name %> 
+              <% if @song.favorited_by?(current_user) %>
+                <%= link_to "★",  song_favorite_path(@song) , method: :delete, style: "color: yellow;" %>
+              <% else %>
+                <%= link_to "★", song_favorite_path(@song), method: :post, style: "color:  blue;" %>
               <% end %>
-            </td>
+            </td></tr>
+            <tr><th>DESCRIPTION</th></tr>
+            <tr><td><%= @song.description %></td></tr>
+            <tr>
+              <th>URL</th>
+              <td>
+                <% @song.addresses.each do |address| %>
+                  <%= address.name %>&emsp;<%= address.url %>
+                <% end %>
+              </td>
+            </tr>
           </table>
         </div>
       </div>

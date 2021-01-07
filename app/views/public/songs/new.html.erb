@@ -1,0 +1,35 @@
+<div class="col-sm-12 relative">
+  <%= render "layouts/sidebar" %>
+  <div class="main-content">
+    <div class="row">
+      <%= form_with model: @song, local: true do |f| %>
+        <div class="col-sm-4 col-sm-offset-1">
+          IMAGEIMAGE
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= f.label :name, "NAME", class: "control-label" %><br>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :description, class: "control-label" %><br>
+            <%= f.text_area :description, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= fields_for :address do |field| %>
+              <div class="form-group">
+                <%= field.label :name, "NAME", class: "control-label" %><br>
+                <%= field.text_field :name, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= field.label :url, "URL", class: "control-label" %><br>
+                <%= field.text_area :url, class: "form-control" %>
+              </div>
+              <%= f.submit "POST", class: "btn btn-default" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
