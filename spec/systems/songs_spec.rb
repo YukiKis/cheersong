@@ -23,6 +23,20 @@ RSpec.describe "songs-page", type: :system do
     before do
       visit song_path(song)
     end
+    it "has song name" do
+      expect(page).to have_content song.name
+    end
+    it "has song description" do
+      expect(page).to have_content song.description
+    end
+    it "has song urls" do
+      song.addresses.each do |address|
+        expect(page).to have_link address.url, href: address_url
+      end
+    end
+    it "has song favorite_link" do
+      expect(page).to have_content "★", href:  song_favorite_path(song)
+    end
   end
   
   context "on edit" do

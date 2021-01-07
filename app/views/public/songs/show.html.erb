@@ -1,0 +1,29 @@
+<div class="col-sm-12 relative">
+  <%= render "layouts/sidebar" %>
+  <div class="main-content">
+    <%= render "layouts/jumbotron" %>
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1">
+        <div class="song-image">
+          IMAGEIMGAE
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="song-info">
+          <table>
+            <th>NAME</th>
+            <td><%= @song.name %> <%= link_to "★",  song_favorite_path(song) , method: :post>
+            <th>DESCRIPTION</th>
+            <td><%= song.description %></td>
+            <th>URL</th>
+            <td>
+              <% @song.addresses.each do |address| %>
+                <%= address.name %>&emsp;<%= address.url %>
+              <% end %>
+            </td>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

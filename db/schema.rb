@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_06_143515) do
+ActiveRecord::Schema.define(version: 2021_01_07_133441) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "song_id"
     t.text "url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["song_id"], name: "index_addresses_on_song_id"
   end
 

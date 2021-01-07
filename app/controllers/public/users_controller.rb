@@ -9,6 +9,7 @@ class Public::UsersController < ApplicationController
     if @user != current_user
       @room = current_user.has_room?(@user)
     end
+    debugger
   end
 
   def edit
