@@ -14,11 +14,7 @@
             <tr><th>NAME</th>
             <td>
               <%= @song.name %> 
-              <% if @song.favorited_by?(current_user) %>
-                <%= link_to "★",  song_favorite_path(@song) , method: :delete, style: "color: yellow;" %>
-              <% else %>
-                <%= link_to "★", song_favorite_path(@song), method: :post, style: "color:  blue;" %>
-              <% end %>
+              <%= render "public/favorites/favorite", song: @song %>
             </td></tr>
             <tr><th>DESCRIPTION</th></tr>
             <tr><td><%= @song.description %></td></tr>

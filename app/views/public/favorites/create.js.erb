@@ -1,0 +1,2 @@
+$("#favorite-btn-<%= @song.id %>").html("<%= j(render 'public/favorites/favorite', song: @song) %> ");
+$(".notice").text("You favorited the song!");

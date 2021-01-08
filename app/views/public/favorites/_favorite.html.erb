@@ -1,0 +1,7 @@
+<div id="favorite-btn-<%= song.id  %>">
+  <% if song.favorited_by?(current_user) %>
+    <%= link_to "★",  song_favorite_path(song) , method: :delete,  remote: true, style: "color: yellow;" %>
+  <% else %>
+    <%= link_to "★", song_favorite_path(song), method: :post,  remote: true, style: "color:  blue;" %>
+  <% end %>
+</div>

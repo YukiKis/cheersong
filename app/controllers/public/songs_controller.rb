@@ -1,6 +1,6 @@
 class Public::SongsController < ApplicationController
   def index
-    @songs = Song.all
+    @songs = Song.includes(:favorites).all
   end
   
   def show
