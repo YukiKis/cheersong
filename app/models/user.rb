@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :keys, dependent: :destroy
   has_many :rooms, through: :keys
   has_many :songs, dependent: :destroy
+  has_many :comments, dependent: :destroy
   
   def follow(user)
     self.active_relationships.create(followed: user)

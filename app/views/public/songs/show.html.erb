@@ -29,6 +29,22 @@
             </tr>
           </table>
         </div>
+        <div class="song-comments">
+          <h3>COMMENTS(<%= @song.comments.count %>)</h3>
+          <%= form_with model: @comment, url: song_comments_path(@song), local: true do |f| %>
+            <div class="form-group form-inline">
+              <span>IMAGEIMAGE</span>
+              <%= f.label :content, "コメント", class: "control-label" %>
+              <%= f.text_area :content, rows: 2, class: "form-controL" %>
+              <%= f.submit "POST", class: "btn btn-default" %>
+            </div>
+          <% end %>
+          <ul class="song-comment-list">
+            <% @song.comments.each do |comment| %>
+              <%= render "public/comments/comment", comment: comment %>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

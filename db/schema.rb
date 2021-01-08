@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_07_133441) do
+ActiveRecord::Schema.define(version: 2021_01_08_121702) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "song_id"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 2021_01_07_133441) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.index ["song_id"], name: "index_addresses_on_song_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "song_id"
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_comments_on_song_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
