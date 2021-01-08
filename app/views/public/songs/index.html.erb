@@ -8,14 +8,16 @@
         <table class="table table-hover">
           <thead class="row">
             <th class="col-sm-6">NAME</th>
+            <th class="col-sm-1"></th>
             <th class="col-sm-2">FAVORITES</th>
-            <th class="col-sm-4"></th>
+            <th class="col-sm-3"></th>
           </thead>
           <tbody>
             <% @songs.each do |song| %>
               <tr>
                 <td><%= song.name %></td>
-                <td><%= song.favorites.count %></td>
+                <td><%= render "public/favorites/favorite", song: song %></td>
+                <td id="favorite-count-<%= song.id %>"><%= song.favorites.count %></td>
                 <td><%= link_to "See More", song_path(song) %></td>
               </tr>
             <% end %>
