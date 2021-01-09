@@ -27,9 +27,25 @@ class Public::SongsController < ApplicationController
     end
   end
   
+  def edit
+    @song = Song.find(params[:id])
+    if @song.user != current_user
+      redirect_to song_path(@song), notice: "cannnot edit other's song"
+    end
+  end
+  
+  def update
+    @song = Song.find(params[:id])
+    if @song.update(song_params)
+      redirect_to song_path(@song), notice: "successfully updated"
+    else
+      render :edit
+    end
+  end
+  
   private
     def song_params
-      params.require(:song).permit(:name, :description)
+      params.require(:song).permit(:name, :description, :tag_list)
     end
     
     def address_params

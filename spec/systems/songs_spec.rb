@@ -4,6 +4,7 @@ RSpec.describe "songs-page", type: :system do
   let(:user1){ create(:user1) }
   let(:user2){ create(:user2) }
   let(:song){ create(:song, user: user1) }
+  let(:song2){ create(:song2, user: user2) }
   before do
     login_user user1
   end
@@ -72,11 +73,57 @@ RSpec.describe "songs-page", type: :system do
       click_button "POST"
       expect(page).to have_content "エラー"
     end
+    it "has link to edit if the user is same as the song's user" do
+      expect(page).to have_link "EDIT", href: edit_song_path(song)
+    end
+    it "has NO LINK to edit if it is the different user" do
+      visit song_path(song2)
+      expect(page).to have_no_content "EDIT", href: edit_song_path(song2)
+    end
   end
   
   context "on edit" do
     before do
       visit edit_song_path(song)
+    end
+    it "has image_form" do
+      expect(page).to have_field "song[image]"
+    end
+    it "has name_form" do
+      expect(page).to have_field "song[name]", with: song.name
+    end
+    it "has description_form" do
+      expect(page).to have_field "song[description]", with: song.description
+    end
+    it "has tag_list form" do
+      expect(page).to have_field "song[tag_list]", with: song.tags
+    end
+    it "has button to update" do
+      expect(page).to have_button "Update"
+    end
+    it "successfully update" do
+      fill_in "song[name]", with: "EXAMPLE"
+      fill_in "song[description]", with: "EGEG"
+      fill_in "song[tag_list]", with: "EG, eg"
+      click_button "Update"
+      expect(page).to have_content "successfully update"
+      expect(current_path).to eq song_path(song)
+      expect(page).to have_content "EXAMPLE"
+      expect(page).to have_content "EGEG"
+      expect(page).to have_content "EG, eg"
+    end
+    it "fails to update" do
+      fill_in "song[name]", with: ""
+      click_button "Update"
+      expect(page).to have_content "エラー"
+    end
+    it "has link to back to show page" do
+      expect(page).to have_link "Back", href: song_path(song)
+    end
+    it "tries to visit edit for other usre's song but to show page" do
+      visit edit_song_path(song2)
+      expect(page).to have_content "cannot edit"
+      expect(current_path).to eq song_path(song2)
     end
   end
 end

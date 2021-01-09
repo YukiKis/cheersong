@@ -4,6 +4,8 @@ class Song < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
   
+  acts_as_taggable_on :tags
+  
   validates :name, presence: true
   validates :description, length: { maximum: 500 }
   

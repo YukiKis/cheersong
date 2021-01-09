@@ -30,7 +30,18 @@
                 <% end %>
               </td>
             </tr>
+            <tr>
+              <th>TAGS</th>
+              <td>
+                <% @song.tag_list.each do |tag| %>
+                  <%= tag %>                  
+                <% end %>
+              </td>
+            </tr>
           </table>
+          <% if current_user == @song.user %>
+            <%= link_to "EDIT", edit_song_path(@song) %>
+          <% end %>
         </div>
         <div class="song-comments">
           <h3>COMMENTS(<%= @song.comments.count %>)</h3>
