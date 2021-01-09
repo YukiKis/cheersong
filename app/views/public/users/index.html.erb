@@ -15,7 +15,7 @@
             <% @users.each do |user| %>
               <tr>
                 <td><%= user.name %></td>
-                <td><%#= user.songs.count %>件</td>
+                <td><%= user.songs.count %>件</td>
                 <td><%= link_to "SEE MORE", user %></td>
               </tr>
             <% end %>

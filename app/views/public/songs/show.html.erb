@@ -15,7 +15,7 @@
             <tr>
               <th>NAME</th>
               <td>
-                <%= @song.name %><%= @song.favorites.count %>いいね！ <%= render "public/favorites/favorite", song: @song %>
+                <%= @song.name %><%= render "public/favorites/favorite", song: @song %>
               </td>
             </tr>
             <tr>

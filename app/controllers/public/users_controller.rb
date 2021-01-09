@@ -6,6 +6,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @songs = @user.songs
     if @user != current_user
       @room = current_user.has_room?(@user)
     end
