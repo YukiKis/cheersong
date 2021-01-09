@@ -2,5 +2,8 @@
   <p class="comment-content">
     <span class="user-image">IMAGEIMAGE<br><%= comment.user.name %></span>
     <%= comment.content %>
+    <% if current_user == comment.user %>
+      <%= link_to "DELETE", song_comment_path(comment.song, comment), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %>
   </p>
 </li>

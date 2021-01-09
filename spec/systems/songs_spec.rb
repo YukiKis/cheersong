@@ -55,7 +55,8 @@ RSpec.describe "songs-page", type: :system do
       #check with each
       song.comments.each do |comment|
         expect(page).to have_content comment.content
-        expect(page).to have_link comment.user.name, user_path(comment_user)
+        expect(page).to have_link comment.user.name, href: user_path(comment_user)
+        expect(page).to have_link "DELETE", href: song_comment_path(comment)
       end
     end
     it "has form for comment" do

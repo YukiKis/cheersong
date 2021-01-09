@@ -12,13 +12,16 @@
       <div class="col-sm-6">
         <div class="song-info">
           <table>
-            <tr><th>NAME</th>
-            <td>
-              <%= @song.name %> 
-              <%= render "public/favorites/favorite", song: @song %>
-            </td></tr>
-            <tr><th>DESCRIPTION</th></tr>
-            <tr><td><%= @song.description %></td></tr>
+            <tr>
+              <th>NAME</th>
+              <td>
+                <%= @song.name %><%= @song.favorites.count %>いいね！ <%= render "public/favorites/favorite", song: @song %>
+              </td>
+            </tr>
+            <tr>
+              <th>DESCRIPTION</th>
+              <td><%= @song.description %></td>
+            </tr>
             <tr>
               <th>URL</th>
               <td>
@@ -35,7 +38,8 @@
             <div class="form-group form-inline">
               <span>IMAGEIMAGE</span>
               <%= f.label :content, "コメント", class: "control-label" %>
-              <%= f.text_area :content, rows: 2, class: "form-controL" %>
+              <%= f.text_area :content, rows: 2, class: "form-control" %>
+              <%= f.hidden_field :song_id, value: @song.id %>
               <%= f.submit "POST", class: "btn btn-default" %>
             </div>
           <% end %>
