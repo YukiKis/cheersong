@@ -6,6 +6,8 @@ class Song < ApplicationRecord
   
   acts_as_taggable_on :tags
   
+  mount_uploader :avatar, AvatarUploader
+  
   validates :name, presence: true
   validates :description, length: { maximum: 500 }
   

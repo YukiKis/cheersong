@@ -3,11 +3,14 @@
   <div class="main-content">
     <%= render "layouts/jumbotron" %>
     <h2>Edit <%= @song.name %></h2>
-    <div class="col-sm-4 col-sm-offset-1">
-      IMAGEIMAGE
-    </div>
-    <div class="col-sm-6">
-      <%= form_with model: @song, local: true do |f| %>
+    <%= form_with model: @song, local: true do |f| %>
+      <div class="col-sm-4 col-sm-offset-1">
+        <div class="form-group">
+          <%= f.label :avatar, class: "control-label"%>
+          <%= f.file_field :avatar %>
+        </div>
+      </div>
+      <div class="col-sm-6">
         <div class="form-group">
           <%= f.label :name, class: "control-label" %><br>
           <%= f.text_field :name, class: "form-control" %>
@@ -21,8 +24,8 @@
           <%= f.text_field :tag_list, class: "form-control" %>
         </div>
         <%= f.submit "UPDATE", class: "btn btn-default" %>
+      </div>
       <% end %>
     </div>
-  </div>
   <%= link_to "Back", song_path(@song) %>
 </div>

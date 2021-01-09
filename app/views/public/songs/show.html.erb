@@ -6,7 +6,7 @@
       <div class="col-sm-4 col-sm-offset-1">
         <%= link_to "Back", songs_path %>
         <div class="song-image">
-          IMAGEIMGAE
+          <%= image_tag(@song.avatar.url) %>
         </div>
       </div>
       <div class="col-sm-6">
