@@ -117,5 +117,40 @@ RSpec.describe "User-page", type: :system do
 #    end
   end
   context "on edit" do
+    before do
+      visit edit_user_path(user1)
+    end
+    it "fails to visit if it is the other user" do
+      visit edit_user_path(user2)
+      expect(page).to have_content "cannot edit"
+      expect(current_path).to eq user_path(user2)
+    end
+    it "has file_field" do
+      expect(page).to have_field "user[avatar]"
+    end
+    it "has name_field" do
+      expect(page).to have_filed "user[name]"
+    end
+    it "has introduction field" do
+      expect(page).to have_field "user[introduction]"
+    end
+    it "has email field" do
+      expect(page).to have_field "user[email]"
+    end
+    it "succeeds to update" do
+      attach_file "user[avatar]", "#{ Rails.root.join("/spec/factories/noiamge.jpg") }"
+      fill_in "user[name]", with: "EG"
+      flll_in "user[introduction]", with: "intro"
+      fill_in "user[email]", with: "eg@com"
+      click_button "UPDATE"
+      expect(page).to have_content "successfully"
+      expect(page).to have_content "EG"
+      expect(page).to have_content "intro"
+    end
+    it "fails to update" do
+      fill_in "user[name]", with: ""
+      click_button "UPDATE"
+      expect(page).to have_content "エラー"
+    end
   end
 end

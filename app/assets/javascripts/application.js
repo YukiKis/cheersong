@@ -15,18 +15,19 @@
 //= require turbolinks
 //= require jquery
 //= require bootstrap-sprockets
+
 //= require_tree .
 
 $(document).on("turbolinks:load", function(){
   
-  $("#song_avatar").on("change", function(e){
+  $("#song_avatar, #user_avatar").on("change", function(e){
     var reader = new FileReader()
     reader.onload = function(e){
-      if($(".song-avatar").length > 0){
-        $(".song-avatar").attr("src", e.target.result)      
+      if($(".avatar").length > 0){
+        $(".avatar").attr("src", e.target.result)      
       }else{
-        var $song_avatar = $("<img>").attr("src", e.target.result)
-        $(".image").prepend($song_avatar)
+        var $avatar = $("<img>").attr("src", e.target.result)
+        $(".image").prepend($avatar)
       }
     };
     reader.readAsDataURL(e.target.files[0]);

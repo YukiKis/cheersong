@@ -6,7 +6,9 @@
     <%= form_with model: @song, local: true do |f| %>
       <div class="col-sm-4 col-sm-offset-1">
         <div class="form-group">
-          <%= image_tag @song.avatar.url, class: "song-avatar" %>
+          <% if @user.avatar %>
+            <%= image_tag @user.avatar.url %>
+          <% end %>
           <%= f.label :avatar, class: "control-label"%>
           <%= f.file_field :avatar %>
         </div>

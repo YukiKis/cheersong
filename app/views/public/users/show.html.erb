@@ -26,6 +26,8 @@
               <% else %>
                 <th><%= link_to "Follow", user_follow_path(@user), method: :post %></th>
               <% end %>
+            <% else %>
+              <th><%= link_to "EDIT", edit_user_path(@user) %></th>
             <% end %>
           </tr>
           <tr>

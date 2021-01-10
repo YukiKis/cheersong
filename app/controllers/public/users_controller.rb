@@ -13,6 +13,19 @@ class Public::UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
+    if current_user != @user
+      redirect_to user_path(@user), notice: "cannot edit others"
+    end
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: "successfully updated"
+    else
+      render :edit
+    end
   end
   
   def follow
@@ -42,4 +55,9 @@ class Public::UsersController < ApplicationController
     @users = @user.followings
     render "public/users/follow"
   end
+  
+  private
+    def user_params
+      params.require(:user).permit(:name, :email, :introduction, :avatar)
+    end
 end

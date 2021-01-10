@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :songs, dependent: :destroy
   has_many :comments, dependent: :destroy
   
+  mount_uploader :avatar, AvatarUploader
+  
   def follow(user)
     self.active_relationships.create(followed: user)
   end
