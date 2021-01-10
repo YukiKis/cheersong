@@ -100,8 +100,19 @@ RSpec.describe "User-page", type: :system do
       visit user_path(user2)
       expect(page).to have_link "Chats", href: user_rooms_path(user2)
     end
-    #it "has list for songs" do
-    #end
+    it "has list for songs" do
+      user1.songs.each do |song|
+        expect(page).to have_content song.name
+        expect(page).to have_link "See More", href: song_path(song)
+      end
+    end
+    it "has link to new song if it is the current User" do
+      expect(page).to have_link "New Song", href: new_song_path
+    end
+    it "has NO LINK to new song if it is the diffenret user" do
+      visit user_path(user2)
+      expect(page).to have_no_link "New Song", href: new_song_path
+    end
 #    it "has songs list" do
 #    end
   end

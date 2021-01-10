@@ -18,6 +18,20 @@
 //= require_tree .
 
 $(document).on("turbolinks:load", function(){
+  
+  $("#song_avatar").on("change", function(e){
+    var reader = new FileReader()
+    reader.onload = function(e){
+      if($(".song-avatar").length > 0){
+        $(".song-avatar").attr("src", e.target.result)      
+      }else{
+        var $song_avatar = $("<img>").attr("src", e.target.result)
+        $(".image").prepend($song_avatar)
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  })
+  
   $(".sidebar").on(
     {"mouseover": function(){
     $(".main-content").stop().animate({

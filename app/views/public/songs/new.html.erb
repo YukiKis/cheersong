@@ -3,7 +3,7 @@
   <div class="main-content">
     <div class="row">
       <%= form_with model: @song, local: true do |f| %>
-        <div class="col-sm-4 col-sm-offset-1">
+        <div class="col-sm-4 col-sm-offset-1 image">
           <%= f.label :avatar, class: "control-label" %>
           <%= f.file_field :avatar, class: "form-control" %>
         </div>

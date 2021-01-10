@@ -15,6 +15,7 @@
     <% if user_signed_in? %>
       <li class="nav-list-item"><%= link_to "USERS", users_path %></li>
       <li class="nav-list-item"><%= link_to "SONGS", songs_path %></li>
+      <li class="nav-list-item"><%= link_to "New Song", new_song_path %></li>
       <li class="nav-list-item"><%= link_to "LOGOUT", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" } %></li>
     <% else %>
       <li class="nav-list-item"><%= link_to "HOME", root_path %></li>
