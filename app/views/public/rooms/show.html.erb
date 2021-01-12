@@ -3,7 +3,29 @@
   <div class="main-content">
     <div class="row">
       <div class="col-sm-3 col-sm-offset-1" style="border: 10px solid orange;">
-        
+        <table class="table table-hover">
+          <thead class="row">
+            <th class="col-sm-4">Name</th>
+            <th class="col-sm-8">Last Message</th>
+          </thead>
+          <tbody>
+            <% current_user.rooms.each do |room| %>
+              <% if room.messages.any? %>
+                <% 
+                  other = room.users.select { |user| current_user != user }[0]
+                %>
+                <tr>
+                    <td>
+                      <%= link_to other.name, user_room_path(other, room) %>
+                    </td>
+                    <td>
+                      <%= link_to room.messages.last.content, user_room_path(other, room) %>
+                    </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
       </div>
       <div class="col-sm-7">
         <h2 class="text-center mb-30">Message with <%= @user.name %></h2>
