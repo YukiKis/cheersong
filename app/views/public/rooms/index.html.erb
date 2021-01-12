@@ -14,14 +14,18 @@
             </thead>
             <tbody>
               <% @rooms.each do |room| %>
-                <% 
-                  other = room.users.select { |user| current_user != user }[0]
-                %>
-                <tr>
-                  <td><%= other.name %></td>
-                  <td><%= room.messages.last.content %> <%= room.messages.last.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-                  <td><%= link_to "Enter Room", user_room_path(other, room) %></td>
-                </tr>
+                <% if room.messages.any? %>
+                  <% 
+                    other = room.users.select { |user| current_user != user }[0]
+                  %>
+                  <tr>
+                    <td><%= other.name %></td>
+                    <td>
+                      <%= room.messages.last.content %> <%= room.messages.last.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
+                    </td>
+                    <td><%= link_to "Enter Room", user_room_path(other, room) %></td>
+                  </tr>
+                <% end %>
               <% end %>
             </tbody>
           </table>

@@ -14,8 +14,8 @@
           <tbody>
             <% @users.each do |user| %>
               <tr>
-                <td><%= user.name %></td>
-                <td><%#= counter("song", user.songs.count) %></td>
+                <td><%= link_to user.name, user_path(user) %></td>
+                <td><%= counter("song", user.songs.count) %></td>
                 <% if current_user.following?(user) %>
                   <td><%= link_to "Unfollow", user_unfollow_path(user), method: :delete %></td>
                 <% else %>

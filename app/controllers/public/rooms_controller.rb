@@ -14,6 +14,6 @@ class Public::RoomsController < ApplicationController
     user = User.find(params[:user_id])
     room = Room.create
     room.users << [current_user, user]
-    redirect_to user_room_path(room)
+    redirect_to user_room_path(user, room)
   end
 end
