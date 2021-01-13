@@ -67,3 +67,11 @@
 .mb-15{
   margin-bottom: 15px;
 }
+
+.clearfix{
+  &:after{
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

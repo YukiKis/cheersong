@@ -1,9 +1,15 @@
-<li class="song-comment">
+<li class="song-comment" style="list-style-type: none;">
   <p class="comment-content">
-    <span class="user-image">IMAGEIMAGE<br><%= comment.user.name %></span>
-    <%= comment.content %>
-    <% if current_user == comment.user %>
-      <%= link_to "DELETE", song_comment_path(comment.song, comment), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure?" } %>
-    <% end %>
+    <div class="clearfix">
+      <% if comment.user.avatar.url != nil %>
+        <%= image_tag(comment.user.avatar.url, size: "50x50") %>
+      <% end %>
+      <p class="comment-left">
+        <%= comment.user.name %>:&emsp;<%= comment.content %>
+      </p>
+      <% if current_user == comment.user %>
+        <%= link_to "DELETE", song_comment_path(comment.song, comment), class: "btn btn-danger pull-right", method: :delete, data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </div>
   </p>
 </li>

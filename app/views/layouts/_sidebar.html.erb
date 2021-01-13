@@ -7,7 +7,11 @@
       <%= submit_tag "SEARCH" %>
     <% end %>  
     <div class="own-info text-center" style="background-color: rgba(15, 195, 250, 0.4)">
-      <span><%= image_tag(current_user.avatar.url, size: "50x50") %></span>
+      <span>
+        <% if current_user.avatar.url != nil %>
+          <%= image_tag(current_user.avatar.url, size: "50x50") %>
+        <% end %>
+      </span>
        <ul class="own-info-list">
          <li class="own-info-list-item"><%= current_user.name %></li>
          <li class="own-info-list-item"><%= link_to "MY PAGE", user_path(current_user) %></li>

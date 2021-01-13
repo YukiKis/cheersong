@@ -4,53 +4,54 @@
     <%= render "layouts/jumbotron" %>
     <div class="row">
       <div class="col-sm-4 col-sm-offset-1">
-        <%= link_to "Back", songs_path %>
         <div class="song-image">
           <% if @song.avatar? %>
             <%= image_tag(@song.avatar.url) %>
           <% end %>
+          <%= render "public/favorites/favorite", song: @song %>
+          <% if current_user == @song.user %>
+            <%= link_to "EDIT", edit_song_path(@song) %>
+          <% end %>
+          <%= link_to "Back", songs_path %>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="song-info">
-          <table>
-            <tr>
-              <th>NAME</th>
-              <td>
-                <%= @song.name %><%= render "public/favorites/favorite", song: @song %>
+          <table class="table table-bordered">
+            <tr class="row">
+              <th class="col-sm-3">NAME</th>
+              <td class="col-sm-9">
+                <%= @song.name %>
               </td>
             </tr>
-            <tr>
-              <th>DESCRIPTION</th>
-              <td><%= @song.description %></td>
+            <tr class="row">
+              <th class="col-sm-3">DESCRIPTION</th>
+              <td clsas="col-sm-9"><%= @song.description %></td>
             </tr>
-            <tr>
-              <th>URL</th>
-              <td>
+            <tr class="row">
+              <th class="col-sm-3">URL</th>
+              <td class="col-sm-9">
                 <% @song.addresses.each do |address| %>
                   <%= address.name %>&emsp;<%= address.url %>
                 <% end %>
               </td>
             </tr>
-            <tr>
-              <th>TAGS</th>
-              <td>
+            <tr class="row">
+              <th class="col-sm-3">TAGS</th>
+              <td class="col-sm-9">
                 <% @song.tag_list.each do |tag| %>
                   <%= tag %>                  
                 <% end %>
               </td>
             </tr>
           </table>
-          <% if current_user == @song.user %>
-            <%= link_to "EDIT", edit_song_path(@song) %>
-          <% end %>
         </div>
         <div class="song-comments">
-          <h3>COMMENTS(<%= @song.comments.count %>)</h3>
+          <h3>COMMENTS&nbsp;(<%= @song.comments.count %>)</h3>
           <%= form_with model: @comment, url: song_comments_path(@song), local: true do |f| %>
-            <div class="form-group form-inline">
-              <span>IMAGEIMAGE</span>
-              <%= f.label :content, "コメント", class: "control-label" %>
+            <div class="form-group">
+              <span><%= image_tag(current_user.avatar.url, size: "50x50") %></span>
+              <%#= f.label :content, "コメント", class: "control-label" %>
               <%= f.text_area :content, rows: 2, class: "form-control" %>
               <%= f.hidden_field :song_id, value: @song.id %>
               <%= f.submit "POST", class: "btn btn-default" %>

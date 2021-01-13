@@ -3,18 +3,19 @@
   <div class="main-content">
     <%= render "layouts/jumbotron" %>
     <div class="row">
-      <div class="col-sm-4 col-sm-offset-1">
+      <div class="col-sm-2 col-sm-offset-1">
         <h2>ユーザー情報</h2>
-        <span>IMGIMG</span>
-        
-        <table class="table">
+        <div class="image-box text-center mb-15">
+          <% if @user.avatar.url != nil %>
+            <%= image_tag(@user.avatar.url, size: "100x100") %>
+          <% end %>
+        </div>
+        <table class="table text">
           <tr><th><%= @user.name %></th></tr>
           <tr><th>
             <%= link_to user_followers_path(@user) do %>
               <%= counter("follower", @user.followers.count) %>
             <% end %>
-          </th></tr>
-          <tr><th>
             <%= link_to user_followings_path(@user) do %>
               <%= counter("following", @user.followings.count) %>
             <% end %>
@@ -44,7 +45,7 @@
         </table>
       </div>
       <div class="col-sm-6">
-        <h3>Songs <% if current_user == @user %> <%= link_to "New song", new_song_path %> <% end %></h3>
+        <h3 class="clearfix mb-15">Songs <% if current_user == @user %> <%= link_to "New song", new_song_path, class: "pull-right" %> <% end %></h3>
         <table class="table table-hover">
           <thead class="row">
             <th class="col-sm-6">NAME</th>
