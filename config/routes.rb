@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     resources :songs do
       resource :favorite, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
+      collection do
+        post "search/", to: "songs#search", as: :search
+     #   get "search/:keyword", to: "songs#result", as: :result
+      end
     end
   end
 

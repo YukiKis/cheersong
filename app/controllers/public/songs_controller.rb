@@ -43,6 +43,11 @@ class Public::SongsController < ApplicationController
     end
   end
   
+  def search
+    @songs = Song.by_name(params[:keyword])
+    render :index
+  end
+  
   private
     def song_params
       params.require(:song).permit(:name, :description, :tag_list, :avatar)

@@ -1,10 +1,15 @@
 <nav class="absolute sidebar text-center">
   <h2>MENU</h2>
+  <%= form_tag(search_songs_path) do %>
+    <%= label_tag :keyword %>
+    <%= text_field_tag :keyword %>
+    <%= submit_tag "SEARCH" %>
+  <% end %>
   <% if user_signed_in? && %>
     <div class="own-info text-center" style="background-color: rgba(15, 195, 250, 0.4)">
       <span>IMGIMG</span>
        <ul class="own-info-list">
-         <li class="own-info-list-item"><%= current_user.name %></li>
+         <li class="own-info-list-item"><%= current_user.name %></li>11
          <li class="own-info-list-item"><%= link_to "MY PAGE", user_path(current_user) %></li>
          <li class="own-info-list-item"><%= link_to "EDIT", edit_user_path(current_user) %></li>
          <li class="own-info-list-item"><%= link_to "Chats", user_rooms_path(current_user) %></li>

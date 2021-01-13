@@ -20,6 +20,7 @@ RSpec.describe 'Sidebar', type: :system do
   end
   context 'when logged in as user' do
     let(:user1){ create(:user1) }
+    let(:song){ create(:song, user: user1) }
     before do
       login_user(user1)
     end
@@ -34,6 +35,14 @@ RSpec.describe 'Sidebar', type: :system do
     end
     it "has link to chats" do
       expect(page).to have_link "Chats", href: user_rooms_path(user1)
+    end
+    it "has form for search" do
+      expect(page).to have_field "keyword"
+    end
+    it "can search song" do
+      fill_in "keyword", with: "MyFavorite"
+      click_button "SEARCH"
+      expect(page).to have_content user1.name
     end
   end
 end
