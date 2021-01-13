@@ -11,9 +11,13 @@
 
   <body>
     <div class="container-fluid">
-      <div class="row">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+      <div class="row" style="height: inherit;">
+        <% if notice.present? %>
+          <p class="notice"><%= notice %></p>
+        <% end %>
+        <% if alert.present? %>
+          <p class="alert"><%= alert %></p>
+        <% end %>
         <%= yield %>
       </div>
     </div>

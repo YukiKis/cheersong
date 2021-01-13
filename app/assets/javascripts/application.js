@@ -20,6 +20,11 @@
 
 $(document).on("turbolinks:load", function(){
   
+  $(window).on("resize", function(){
+    $(".container-fluid").height($(window).height())
+  });
+  $(window).trigger("resize");
+  
   $("#song_avatar, #user_avatar").on("change", function(e){
     var reader = new FileReader()
     reader.onload = function(e){

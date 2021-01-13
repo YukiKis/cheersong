@@ -23,6 +23,7 @@
 }
 
 .relative{
+  height: 100%;
   position: relative;
   .absolute{
     position: absolute;
@@ -31,7 +32,7 @@
 
 .sidebar{
   width: 200px;
-  height: 100%;
+  height: inherit;
   left: -180px;
   top: 0;
   color: white;
