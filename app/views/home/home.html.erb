@@ -16,10 +16,19 @@
           </p>
         </section>
         <div class="home-tags">
-          <p>TAG TAG TAG</p>
+          <ul style="list-style-type: none;">
+            <% tags = ActsAsTaggableOn::Tag.most_used(5) %>
+            <% tags.each do |tag| %>
+              <li><%= link_to tag.name, tagged_songs_path(tag.name) %></li>
+            <% end %>
+          </ul>
         </div>
         <div class="home-search">
-          <p>Search form</p>
+          <%= form_tag(search_songs_path) do %>
+            <%= label_tag :keyword %>
+            <%= text_field_tag :keyword %>
+            <%= submit_tag "Search" %>
+          <% end %>
         </div>
         <div class="home-songs">
           <p>SONG SONG SONG</p>

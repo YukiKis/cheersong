@@ -40,7 +40,7 @@
               <th class="col-sm-3">TAGS</th>
               <td class="col-sm-9">
                 <% @song.tag_list.each do |tag| %>
-                  <%= tag %>                  
+                  <%= link_to tag, tagged_songs_path(tag) %>                  
                 <% end %>
               </td>
             </tr>

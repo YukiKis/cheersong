@@ -17,8 +17,9 @@ Rails.application.routes.draw do
       resource :favorite, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
       collection do
-        post "search/", to: "songs#search", as: :search
+        post "/search", to: "songs#search", as: :search
      #   get "search/:keyword", to: "songs#result", as: :result
+        get "/tagged/:tag", to: "songs#tagged", as: :tagged
       end
     end
   end

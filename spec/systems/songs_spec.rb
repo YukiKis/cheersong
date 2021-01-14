@@ -12,6 +12,12 @@ RSpec.describe "songs-page", type: :system do
     before do
       visit songs_path
     end
+    it "has tags list" do
+      tags = ActsAsTaggableOn.most_used(5)
+      tags.each do |tag|
+        expect(page).to have_link tag.name, href: tagged_songs_path(tag.name)
+      end
+    end
     it "has songs_list" do
       Song.all.each do |song|
         expect(page).to have_content song.name
@@ -32,6 +38,11 @@ RSpec.describe "songs-page", type: :system do
     end
     it "has song description" do
       expect(page).to have_content song.description
+    end
+    it "has song tag" do
+      song.tags.each do |tag|
+        expect(page).to have_link tag.name, href: tagged_songs_path(tag.name)
+      end
     end
     it "has song urls" do
       song.addresses.each do |address|

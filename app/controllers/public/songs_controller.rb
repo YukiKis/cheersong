@@ -1,6 +1,7 @@
 class Public::SongsController < ApplicationController
   def index
     @songs = Song.includes(:favorites).all
+    @tags = ActsAsTaggableOn::Tag.most_used(5)
   end
   
   def show
@@ -45,6 +46,13 @@ class Public::SongsController < ApplicationController
   
   def search
     @songs = Song.by_name(params[:keyword])
+    @tags = ActsAsTaggableOn::Tag.most_used(5)
+    render :index
+  end
+  
+  def tagged
+    @songs = Song.tagged_with(params[:tag])
+    @tags = ActsAsTaggableOn::Tag.most_used(5)
     render :index
   end
   
